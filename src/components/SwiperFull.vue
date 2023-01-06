@@ -32,6 +32,8 @@
 import { defineComponent, defineProps, ref } from 'vue';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide, } from 'swiper/vue';
+import Button from "@/components/buttons/Button.vue";
+
 import 'swiper/css';
 import "swiper/css/navigation";
 
@@ -41,6 +43,7 @@ import "swiper/css/navigation";
     components: {
       Swiper,
       SwiperSlide,
+      Button
     },
     computed: {
         swiper() {
@@ -81,9 +84,17 @@ import "swiper/css/navigation";
                                 {{item.description}}
                             </div>
 
-                            <a class="slide-item__link animate-delay_450ms"  :class="{animateSlideContent: item.animate}" v-if="item.link" :href="item.link.href">
-                                {{item.link.label}}
-                            </a>
+                            <div 
+                                class="slide-item__link animate-delay_450ms" 
+                                :class="{animateSlideContent: item.animate}" 
+                                v-if="item.link" 
+                            >
+                                <Button
+                                    :link="item.link.href"
+                                >
+                                    {{item.link.label}}
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,20 +174,8 @@ import "swiper/css/navigation";
     }
     &__link{
         display: block;
-        color: $black;
-        font-weight: 600;
-        background-color: $link;;
-        border: 3px solid $link;
         max-width: 234px;
-        padding: 10px 20px;
-        margin: 38px auto 0 auto;
-        @media screen and (min-width: 992px) {
-            &:hover{
-                border: 3px solid $link;
-                background-color: transparent;
-                color: $link;
-            }
-        }
+        margin: 0 auto;
     }
 }
 .swiper-full{
